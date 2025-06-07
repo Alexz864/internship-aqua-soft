@@ -120,7 +120,7 @@ class CSVImporter {
             const uniqueRegions = new Set<string>();
             
             //create a readable stream to read the file row by row
-            fs.createReadStream(filePath)   
+            fs.createReadStream(filePath)
                 .pipe(csv({ separator: '\t' })) //connect file stream to csv-parser
                 .on('data', (row: CSVRow) => {  //csv-parser recives raw file data and outputs parsed row objects
 
@@ -144,12 +144,7 @@ class CSVImporter {
                     //handle regions - add if they exist, otherwise skip
                     if (regionKey?.trim()) {
                         uniqueRegions.add(regionKey.trim());
-                    } 
-                    // else {
-                    //     //generic fallback for missing regions
-                    //     const countryFallback = `${row['Property Country Code']} - Unspecified`;
-                    //     uniqueRegions.add(countryFallback);
-                    // }
+                    }
                 })
                 .on('end', () => {
                     console.log(`Found ${uniqueCities.size} unique cities and ${uniqueRegions.size} unique regions`);
@@ -199,7 +194,7 @@ class CSVImporter {
                 const insertedCities = await db.City.bulkCreate(batch, {
                     transaction,    //use the transaction created above
                     returning: true //return inserted records with database-assigned ID
-                }) as any[];    //result: array of city objects
+                }) as any[];    //array of city objects
                 
                 //update the cities map with actual IDs
                 insertedCities.forEach((city: any) => {
@@ -272,13 +267,6 @@ class CSVImporter {
                         
                         //handle region mapping
                         const regionName = row['Property State/Province'].trim();
-                        // let regionName: string;
-                        // if (row['Property State/Province']?.trim()) {
-                        //     regionName = row['Property State/Province'].trim();
-                        // } 
-                        // else {
-                        //     regionName = `${row['Property Country Code']} - Unspecified`;
-                        // }
                         
                         //look up the database ID for city and region
                         const cityID = this.cities.get(cityKey);
@@ -395,7 +383,7 @@ class CSVImporter {
         }
     }
 
-    //use generic type parameter(<T>) so the method can work with arrays of any type(T could be string, number etc)
+    //we use generic type parameter(<T>) so the method can work with arrays of any type(T could be string, number etc)
     private createBatches = <T>(array: T[], batchSize: number): T[][] => {
         const batches: T[][] = [];  //create a 2D(array of arrays of type T)
         for (let i = 0; i < array.length; i += batchSize) { //loop jumps by batchSize amount each iteration
@@ -426,6 +414,7 @@ const importHotelData = async(csvFilePath: string): Promise<void> => {
         throw error;
     }
 }
+
 
 //array containing all command line arguments
 const csvFilePath = process.argv[2];

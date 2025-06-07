@@ -1,10 +1,10 @@
 import { Model, DataTypes } from "sequelize";
 import sequelize from "../config/database";
-import { HotelAttributes } from "../types";
+import { HotelAttributes, HotelCreationAttributes } from "../types";
 import City from "./City";
 import Region from "./Region";
 
-class Hotel extends Model<HotelAttributes> implements HotelAttributes {
+class Hotel extends Model<HotelAttributes, HotelCreationAttributes> implements HotelAttributes {
     public GlobalPropertyID!: number;
     public SourcePropertyID!: string;
     public GlobalPropertyName!: string;
@@ -16,7 +16,7 @@ class Hotel extends Model<HotelAttributes> implements HotelAttributes {
     public PropertyStateProvinceID!: number;
     public PropertyZipPostal!: string;
     public PropertyPhoneNumber!: string;
-    public PropertyFaxNumber!: string;
+    public PropertyFaxNumber?: string;
     public SabrePropertyRating!: number;
     public PropertyLatitude!: number;
     public PropertyLongitude!: number;
@@ -33,6 +33,7 @@ Hotel.init(
 
         SourcePropertyID: {
             type: DataTypes.STRING(50),
+            unique: true,
             allowNull: false
         },
 
@@ -122,11 +123,12 @@ Hotel.init(
     }
 );
 
-//define relations
+//many-to-one relationship
 Hotel.belongsTo(City, { foreignKey: 'CityID', as: 'city' });
-Hotel.belongsTo(Region, { foreignKey: 'PropertyStateProvinceID', as: 'region' });
-
 City.hasMany(Hotel, { foreignKey: 'CityID', as: 'hotels' });
+
+//many-to-one relationship
+Hotel.belongsTo(Region, { foreignKey: 'PropertyStateProvinceID', as: 'region' });
 Region.hasMany(Hotel, { foreignKey: 'PropertyStateProvinceID', as: 'hotels' });
 
 export default Hotel;

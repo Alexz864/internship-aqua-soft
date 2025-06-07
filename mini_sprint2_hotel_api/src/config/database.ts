@@ -1,7 +1,8 @@
 import {Sequelize} from 'sequelize';
-import doenv from 'dotenv';
+import dotenv from 'dotenv';
 
-doenv.config();
+//load environment variables
+dotenv.config();
 
 const sequelize = new Sequelize ({
     database: process.env.DB_NAME || 'hotel_db',
