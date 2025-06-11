@@ -20,6 +20,7 @@ export const getAllHotels = async (req: Request, res: Response<ApiResponse>): Pr
 
         //limit maximum results per page to prevent overload
         const maxLimit = 200;
+        
         //ensure the requested limit doesn't exceed maxLimit
         const finalLimit = Math.min(limit, maxLimit);
 

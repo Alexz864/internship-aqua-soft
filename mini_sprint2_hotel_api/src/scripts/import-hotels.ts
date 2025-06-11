@@ -1,7 +1,6 @@
 import fs from 'fs';
 import csv from 'csv-parser';
 import db from '../models';
-import { Transaction } from 'sequelize';
 
 //define structure of a row mapping column names to TypeScript types
 interface CSVRow {
@@ -425,7 +424,7 @@ if (!csvFilePath) {
     process.exit(1);
 }
 
-//check if file exists before proceeding
+//check if the file exists before proceeding
 if (!fs.existsSync(csvFilePath)) {
     console.error(`Error: File not found at path: ${csvFilePath}`);
     console.error('Please check the file path and try again.');

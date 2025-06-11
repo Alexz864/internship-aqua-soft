@@ -35,6 +35,22 @@ export interface RegionAttributes {
 }
 
 
+//review interface
+export interface ReviewAttributes {
+    ReviewID: number;
+    GlobalPropertyID: number;
+    ReviewerName: string;
+    ReviewTitle: string;
+    ReviewContent: string;
+    ValueRating: number;
+    LocationRating: number;
+    ServiceRating: number;
+    RoomsRating: number;
+    CleanlinessRating: number;
+    SleepQualityRating: number;
+}
+
+
 //auth-related interfaces
 export interface UserPayload {
     id: string;

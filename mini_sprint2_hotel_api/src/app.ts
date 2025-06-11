@@ -40,8 +40,7 @@ app.use('*', (req: Request, res: Response) => {
                 'POST /api/auth/login - Login for testing',
                 'POST /api/hotels - Create new hotel (requires auth)',
                 'PUT /api/hotels/:id - Update hotel (requires auth)',
-                'DELETE /api/hotels/:id - Delete hotel (requires auth)',
-                'GET /api/hotels-stats - Get hotel statistics (requires auth)'
+                'DELETE /api/hotels/:id - Delete hotel (requires auth)'
             ]
         }
     });

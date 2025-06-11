@@ -7,7 +7,8 @@
     "dev": "nodemon --exec ts-node src/server.ts",
     "build": "tsc",
     "start": "node dist/server.js",
-    "import-csv": "ts-node src/scripts/import-hotels.ts"
+    "import-csv": "ts-node src/scripts/import-hotels.ts",
+    "scrape-reviews": "ts-node src/scripts/import-reviews.ts"
   },
   "keywords": [],
   "author": "",
@@ -26,7 +27,6 @@
     "sequelize": "^6.37.7"
   },
   "devDependencies": {
-    "@types/bcryptjs": "^3.0.0",
     "@types/cors": "^2.8.18",
     "@types/jsonwebtoken": "^9.0.9",
     "@types/node": "^22.15.29",
